@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export enum GameStatus {
     Ongoing = 'ONGOING',
@@ -26,7 +26,11 @@ const initialState: GameState = {
 export const gameSlice = createSlice({
     name: 'game',
     initialState,
-    reducers: {}
+    reducers: {
+        play: (state, action: PayloadAction<Array<number>>) => {}
+    }
 })
 
 export default gameSlice.reducer
+
+export const { play } = gameSlice.actions
