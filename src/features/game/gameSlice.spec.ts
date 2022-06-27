@@ -34,4 +34,23 @@ describe('game state', () => {
         expect(newState.turn).toEqual('X')
         expect(newState.board[1][1]).toEqual('O')
     })
+    it('should set the player 1 winning with 3 X in a row', () => {
+        const newState = gameReducer(initialState, play([0, 0]))
+        expect(newState.status).toEqual(GameStatus.P1won)
+    })
+    it('should set the player 2 winning with 3 O in a row', () => {
+        const newState = gameReducer({...initialState, turn: 'O'}, play([0, 0]))
+        expect(newState.status).toEqual(GameStatus.P2won)
+    })
+    it('should end with draw when the board is filled', () => {
+        const newState = gameReducer({
+            ...initialState,
+            board: [
+                ['X', 'O', 'X',],
+                ['O', 'O', 'X',],
+                [' ', 'X', 'O',],
+            ]
+        }, play([2, 0]))
+        expect(newState.status).toEqual(GameStatus.draw)
+    })
 })
