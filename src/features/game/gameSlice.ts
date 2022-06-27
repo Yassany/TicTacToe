@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { act } from "react-dom/test-utils";
 
 export enum GameStatus {
     Ongoing = 'ONGOING',
@@ -27,7 +28,25 @@ export const gameSlice = createSlice({
     name: 'game',
     initialState,
     reducers: {
-        play: (state, action: PayloadAction<Array<number>>) => {}
+        // play 1 turn
+        play: (state, action: PayloadAction<Array<number>>) => {
+            const [y, x] = action.payload
+            // check for valid play input
+            if (
+                state.board[y][x] != ' '
+                || !action.payload.every(n => [0, 1, 2].includes(n))
+                || state.status != GameStatus.Ongoing) {
+                return
+            }
+            
+            state.board[y][x] = state.turn
+            if (state.turn == 'X') {
+                state.turn = 'O'
+            } else {
+                state.turn = 'X'
+            }
+
+        }
     }
 })
 
