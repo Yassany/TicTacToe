@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { act } from "react-dom/test-utils";
 import { RootState } from "../../app/store";
 
 export enum GameStatus {
@@ -83,3 +82,5 @@ export default gameSlice.reducer
 export const { play } = gameSlice.actions
 
 export const selectBoard = (state: RootState) => state.game.board
+export const selectTurn = (state: RootState) => state.game.turn
+export const selectStatus = (state: RootState) => state.game.status
