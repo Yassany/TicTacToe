@@ -1,0 +1,11 @@
+.row {
+  display: block;
+  text-align: center;
+}
+
+.column {
+  display: inline-block;
+  margin: 0px 7px;
+  min-width: 30px;
+  min-height: 30px;
+}

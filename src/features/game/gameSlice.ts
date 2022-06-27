@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { act } from "react-dom/test-utils";
+import { RootState } from "../../app/store";
 
 export enum GameStatus {
     Ongoing = 'ONGOING',
@@ -80,3 +81,5 @@ const checkEndGame = (board: Array<Array<' ' | 'O' | 'X'>>): GameStatus => {
 export default gameSlice.reducer
 
 export const { play } = gameSlice.actions
+
+export const selectBoard = (state: RootState) => state.game.board
