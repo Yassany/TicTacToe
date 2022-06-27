@@ -38,17 +38,44 @@ export const gameSlice = createSlice({
                 || state.status != GameStatus.Ongoing) {
                 return
             }
-            
+
             state.board[y][x] = state.turn
             if (state.turn == 'X') {
                 state.turn = 'O'
             } else {
                 state.turn = 'X'
             }
+            state.status = checkEndGame(state.board)
 
         }
     }
 })
+
+const checkEndGame = (board: Array<Array<' ' | 'O' | 'X'>>): GameStatus => {
+    
+    const winningCombinations = [
+        [[0,0], [0,2], [0,1]],
+        [[1,0], [1,2], [1,1]],
+        [[2,0], [2,2], [2,1]],
+        [[0,0], [1,0], [2,0]],
+        [[0,1], [1,1], [2,1]],
+        [[0,2], [1,2], [2,2]],
+        [[0,0], [1,1], [2,2]],
+        [[2,0], [1,1], [0,2]],
+    ]
+    const winner = ['X', 'O']
+        .find(sign => winningCombinations.some(
+            combination => combination.every(([y, x]) => board[y][x] == sign)
+        ))
+    if (!winner) {
+        if (board.every(row => row.every(square => square != ' '))) {
+            return GameStatus.draw
+        }
+        return GameStatus.Ongoing
+    }
+    if (winner == 'X') return GameStatus.P1won
+    return GameStatus.P2won
+}
 
 export default gameSlice.reducer
 
