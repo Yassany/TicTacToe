@@ -33,14 +33,14 @@ export const gameSlice = createSlice({
             const [y, x] = action.payload
             // check for valid play input
             if (
-                state.board[y][x] != ' '
+                state.board[y][x] !== ' '
                 || !action.payload.every(n => [0, 1, 2].includes(n))
-                || state.status != GameStatus.Ongoing) {
+                || state.status !== GameStatus.Ongoing) {
                 return
             }
 
             state.board[y][x] = state.turn
-            if (state.turn == 'X') {
+            if (state.turn === 'X') {
                 state.turn = 'O'
             } else {
                 state.turn = 'X'
@@ -74,15 +74,15 @@ const checkEndGame = (board: Array<Array<' ' | 'O' | 'X'>>): GameStatus => {
     ]
     const winner = ['X', 'O']
         .find(sign => winningCombinations.some(
-            combination => combination.every(([y, x]) => board[y][x] == sign)
+            combination => combination.every(([y, x]) => board[y][x] === sign)
         ))
     if (!winner) {
-        if (board.every(row => row.every(square => square != ' '))) {
+        if (board.every(row => row.every(square => square !== ' '))) {
             return GameStatus.draw
         }
         return GameStatus.Ongoing
     }
-    if (winner == 'X') return GameStatus.P1won
+    if (winner === 'X') return GameStatus.P1won
     return GameStatus.P2won
 }
 
