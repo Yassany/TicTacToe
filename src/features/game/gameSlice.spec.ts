@@ -1,4 +1,4 @@
-import gameReducer, { GameState, GameStatus, play } from './gameSlice';
+import gameReducer, { GameState, GameStatus, play, reset } from './gameSlice';
 
 describe('game state', () => {
     const initialState: GameState = {
@@ -52,5 +52,15 @@ describe('game state', () => {
             ]
         }, play([2, 0]))
         expect(newState.status).toEqual(GameStatus.draw)
+    })
+    it('should reset the board', () => {
+        const newState = gameReducer({...initialState, turn: 'O', status: GameStatus.draw}, reset())
+        expect(newState.turn).toEqual('X')
+        expect(newState.status).toEqual(GameStatus.Ongoing)
+        expect(newState.board).toEqual([
+            [' ', ' ', ' ',],
+            [' ', ' ', ' ',],
+            [' ', ' ', ' ',],
+        ])
     })
 })

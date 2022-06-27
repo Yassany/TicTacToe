@@ -47,6 +47,9 @@ export const gameSlice = createSlice({
             }
             state.status = checkEndGame(state.board)
 
+        },
+        reset: (state) => {
+            
         }
     }
 })
@@ -79,7 +82,7 @@ const checkEndGame = (board: Array<Array<' ' | 'O' | 'X'>>): GameStatus => {
 
 export default gameSlice.reducer
 
-export const { play } = gameSlice.actions
+export const { play, reset } = gameSlice.actions
 
 export const selectBoard = (state: RootState) => state.game.board
 export const selectTurn = (state: RootState) => state.game.turn
