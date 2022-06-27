@@ -1,6 +1,6 @@
 import React from "react";
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
-import { GameStatus, selectStatus, selectTurn } from "./gameSlice";
+import { GameStatus, reset, selectStatus, selectTurn } from "./gameSlice";
 
 export function GameBBar() {
     const turn = useAppSelector(selectTurn)
@@ -26,6 +26,7 @@ export function GameBBar() {
                     })()
                     }
                 </p>
+                <button onClick={() => dispatch(reset())}>reset</button>
             </div>
         </div>
     )

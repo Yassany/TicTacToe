@@ -49,7 +49,13 @@ export const gameSlice = createSlice({
 
         },
         reset: (state) => {
-            
+            state.turn = 'X'
+            state.status = GameStatus.Ongoing
+            state.board = [
+                [' ', ' ', ' ',],
+                [' ', ' ', ' ',],
+                [' ', ' ', ' ',],
+            ]
         }
     }
 })
